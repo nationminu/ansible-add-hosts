@@ -1,0 +1,15 @@
+
+- name: "Add host for SSH connection"
+  add_host: 
+    hostname: "{{ item.0.ip }}"
+    ansible_user: "{{ item.0.username }}"
+    ansible_password: "{{ item.0.password }}"
+
+- name: "check directory"
+  shell: "ls /tmp/{{ item.1 }}" 
+  register: "is_exists"
+  delegate_to: "{{ item.0.ip }}" 
+ 
+- name: "debug is_exists"
+  debug:
+    msg: "{{ is_exists }}"

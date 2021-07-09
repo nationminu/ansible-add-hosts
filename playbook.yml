@@ -1,0 +1,38 @@
+--- 
+- name: Update web servers
+  hosts: localhost 
+
+  vars:  
+    username: root
+    password: rplinux     
+    test:
+     - ip : "10.65.40.18"
+       username: root
+       password: rplinux
+       instance:
+        - "SERVER11"
+        - "SERFER12" 
+
+     - ip : "10.65.40.19"
+       username: root
+       password: rplinux     
+       instance:
+        - "SERVER21"
+        - "SERFER22" 
+        - "SERFER23" 
+  
+  tasks: 
+
+    - name: "DEBUG Hostname"
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ test }}"
+        
+    - name: "Include tasks"
+      include_tasks: tasks.yml
+      with_subelements: 
+        - "{{ test }}"
+        - instance
+
+
+

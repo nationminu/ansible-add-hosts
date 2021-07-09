@@ -1,0 +1,5 @@
+host1 ansible_hosts=10.65.40.10
+
+
+[host1:vars]
+instance
